@@ -107,7 +107,7 @@
             this.textBoxSearch.Location = new System.Drawing.Point(157, 29);
             this.textBoxSearch.Name = "textBoxSearch";
             this.textBoxSearch.Size = new System.Drawing.Size(132, 20);
-            this.textBoxSearch.TabIndex = 8;
+            this.textBoxSearch.TabIndex = 0;
             // 
             // labelSearch
             // 
