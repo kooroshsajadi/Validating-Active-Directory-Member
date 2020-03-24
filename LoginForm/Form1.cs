@@ -22,7 +22,10 @@ namespace LoginForm
             //bool Valid = pc.ValidateCredentials("ksajadi", "Abc1234@$");
             PrincipalContext principalContext = new PrincipalContext(ContextType.Domain, TxtBoxAddress.Text);
             bool userValid = principalContext.ValidateCredentials(TxtBoxUsername.Text, TxtBoxPassword.Text);
-            MessageBox.Show(userValid.ToString());
+            if(userValid)
+                MessageBox.Show("User is valid");
+            else
+                MessageBox.Show("User is not valid");
 
             //bool result = false;
             //using (DirectoryEntry _entry = new DirectoryEntry())
