@@ -1,6 +1,8 @@
 ﻿using System;
 using System.DirectoryServices;
+using System.DirectoryServices.AccountManagement;
 using System.Net.Sockets;
+using System.Windows.Forms;
 
 namespace LoginForm
 {
@@ -14,7 +16,33 @@ namespace LoginForm
 
         private void buttonSearch_Click(object sender, EventArgs e)
         {
-            GetInfo(textBoxUsername.Text, textBoxPassword.Text, textBoxAddress.Text);
+            //GetInfo(textBoxUsername.Text, textBoxPassword.Text, textBoxAddress.Text);
+            //PrincipalContext pc = new PrincipalContext(ContextType.Domain, "WinNT://192.168.0.17");
+            //PrincipalContext pc = new PrincipalContext(ContextType.Domain, "WinNT://192.168.0.17", "ksajadi", "Abc1234@$");
+            //bool Valid = pc.ValidateCredentials("ksajadi", "Abc1234@$");
+            PrincipalContext principalContext = new PrincipalContext(ContextType.Domain, TxtBoxAddress.Text);
+            bool userValid = principalContext.ValidateCredentials(TxtBoxUsername.Text, TxtBoxPassword.Text);
+            MessageBox.Show(userValid.ToString());
+
+            //bool result = false;
+            //using (DirectoryEntry _entry = new DirectoryEntry())
+            //{
+            //    _entry.Username = "ksajadi";
+            //    _entry.Password = "Abc1234@$";
+            //    DirectorySearcher _searcher = new DirectorySearcher(_entry)
+            //    {
+            //        Filter = "(objectclass=user)"
+            //    };
+            //    SearchResult sr = _searcher.FindOne();
+            //    string name = sr.Properties["displayname"][0].ToString();
+            //    string accName = sr.Properties["samaccountname"][0].ToString();
+            //    string sn = sr.Properties["sn"][0].ToString();
+            //    MessageBox.Show(name);
+            //    MessageBox.Show(accName);
+            //    MessageBox.Show(sn);
+            //    result = true;
+            //    MessageBox.Show(result.ToString());
+            //}
         }
 
         private void GetInfo(string username, string password, string domain)
@@ -45,7 +73,6 @@ namespace LoginForm
         {
             DirSearch = new DirectorySearcher(
                 new DirectoryEntry("WinNT://" + domain, username, password, AuthenticationTypes.SecureSocketsLayer));
-            //+"/OU=Domain"
             return DirSearch;
         }
 
@@ -91,6 +118,11 @@ namespace LoginForm
                 return userObject;
             else
                 return null;
+        }
+        
+        public void PrincipalContext()
+        {
+
         }
     }
 }
